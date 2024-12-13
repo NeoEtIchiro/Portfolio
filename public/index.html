@@ -16,11 +16,13 @@
     <div class="container games" ng-repeat="section in sections" ng-style="{'background-color': section.color}">
         <h1 class="containerTitle">{{section.title}}</h1>
         <div class="projects" id="projects-{{section.title}}">
+            <div class="invisibleSpace"></div>
             <div class="project" ng-repeat="item in section.items">
                 <img ng-src="{{item.img}}" alt="{{item.title}}" class="projectImage">
                 <div class="projectTitle">{{item.title}}</div>
                 <div class="projectDescription">{{item.description}}</div>
             </div>
+            <div class="invisibleSpace"></div>
         </div>
     </div>
     
