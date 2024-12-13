@@ -1,7 +1,114 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    text-align: center;
-    padding: 50px;
-  }
+  justify-content: center;
+  box-sizing: border-box;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #2b2b2b;
+}
+
+.container {
+  text-align: center;
+  color: white;
+  margin: 0;
+  width: 100%;
+}
+
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-top: 60px;
+  object-fit: cover;
+}
+
+.name {
+  margin-top: 20px;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+#portfolioTitle{
+  margin: 16px;
+  margin-bottom: 32px;;
+}
+
+.games{
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+}
+
+.containerTitle{
+  margin: 8px;
+  width: 100%;
+  flex: 1;
+}
+
+.projectImage{
+  width: 200Px;
+}
+
+.projects{
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  overflow-x: auto; /* Permet le défilement horizontal */
+  cursor:grab;
+}
+
+.projects::before,
+.projects::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px; /* Largeur de l'ombre */
+  pointer-events: none; /* Permet de cliquer à travers l'ombre */
+  z-index: 1;
+}
+
+.projects::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent); /* Ombre à gauche */
+}
+
+.projects::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.5), transparent); /* Ombre à droite */
+}
+
+.projects:active {
+  cursor: grabbing; /* Change le curseur lorsque l'utilisateur clique et maintient */
+}
+
+.projects::-webkit-scrollbar {
+  display: none; /* Pour les navigateurs basés sur WebKit */
+}
+
+.project{
+  background-color: black;
+  transition: transform 0.3s ease;
+  margin: 16px;
+  width: 200px;
+  max-width: 200px;
+}
+
+.project:hover {
+  transform: scale(1.1); /* Applique un zoom de 10% lorsque la souris est dessus */
+}
+
+.projectTitle{
+  margin-top: 4px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.projectDescription{
+  width: 200px;
+  text-align:justify;
+}

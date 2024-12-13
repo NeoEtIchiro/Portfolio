@@ -1,17 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My AngularJS App</title>
-  <link rel="stylesheet" href="../src/assets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio</title>
+    <link rel="stylesheet" href="..\src\assets\styles.css">
 </head>
-<body ng-app="myApp">
-  <div ng-controller="MainController">
-    <h1>{{ message }}</h1>
-  </div>
-  <script src="../node_modules/angular/angular.min.js"></script>
-  <script src="../src/app/app.module.js"></script>
-  <script src="../src/app/app.controller.js"></script>
+<body ng-controller="MainController">
+    <div class="container">
+        <img ng-src="{{profileImagePath}}" alt="Profile Image" class="profile-image">
+        <div class="name">{{name}}</div>
+        <h1 id="portfolioTitle">Mon Portfolio</h1>
+    </div>
+
+    <div class="container games" ng-repeat="section in sections" ng-style="{'background-color': section.color}">
+        <h1 class="containerTitle">{{section.title}}</h1>
+        <div class="projects" id="projects-{{section.title}}">
+            <div class="project" ng-repeat="item in section.items">
+                <img ng-src="{{item.img}}" alt="{{item.title}}" class="projectImage">
+                <div class="projectTitle">{{item.title}}</div>
+                <div class="projectDescription">{{item.description}}</div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="..\node_modules\angular\angular.min.js"></script>
+    <script src="..\src\app\app.controller.js"></script>
+    <script>
+        // JavaScript pour empêcher le drag des images
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('dragstart', (e) => {
+                    e.preventDefault();
+                });
+            });
+
+            // JavaScript pour ajouter le défilement horizontal avec clic et déplacement
+            const projectContainers = document.querySelectorAll('.projects');
+            projectContainers.forEach(container => {
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+
+                container.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    console.log("mousedown");
+                    container.classList.add('active');
+                    startX = e.pageX - container.offsetLeft;
+                    scrollLeft = container.scrollLeft;
+                    e.preventDefault(); // Empêche le comportement par défaut
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    container.classList.remove('active');
+                });
+
+                container.addEventListener('mouseup', () => {
+                    isDown = false;
+                    container.classList.remove('active');
+                });
+
+                container.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - container.offsetLeft;
+                    const walk = x - startX; // Déplace exactement avec la souris
+                    container.scrollLeft = scrollLeft - walk;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
